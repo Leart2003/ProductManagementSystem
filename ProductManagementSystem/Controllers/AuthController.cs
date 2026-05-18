@@ -37,7 +37,8 @@ namespace ProductManagementSystem.Controllers
 
             User user = new User
             {
-                FirsName = registerDto.FirstName,
+                UserName = registerDto.EmailAddress,
+                FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
                 PhoneNumber = registerDto.PhoneNumber,
                 Email = registerDto.EmailAddress,
@@ -78,7 +79,7 @@ namespace ProductManagementSystem.Controllers
         //update
 
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateProfile(UpdateData dto)
+        public async Task<IActionResult> UpdateProfile(UpdateUserDto dto)
         {
             var user = await _userManager.GetUserAsync(User);
 
@@ -89,7 +90,7 @@ namespace ProductManagementSystem.Controllers
 
          
 
-            user.FirsName = dto.FirstName;
+            user.FirstName = dto.FirstName;
             user.LastName = dto.LastName;
             user.PhoneNumber = dto.PhoneNumber;
             user.DateofBirth = dto.DateOfBirth;
