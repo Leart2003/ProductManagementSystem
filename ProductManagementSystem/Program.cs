@@ -1,4 +1,8 @@
 
+using Infrastructure.DB;
+using Microsoft.EntityFrameworkCore;
+using Infrastructure.DB;
+
 namespace ProductManagementSystem
 {
     public class Program
@@ -12,6 +16,8 @@ namespace ProductManagementSystem
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 

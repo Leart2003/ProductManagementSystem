@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain.Entities
 {
-    internal class Product
+    public class Product
     {
 
         public Guid Id { get; set; }
@@ -16,6 +16,8 @@ namespace Domain.Entities
         public decimal Price { get; set; }
 
         public string? Category { get; set; }
+
+        List<Product> products { get; set; } = new List<Product>();
 
 
         //        •	- ID(GUID)

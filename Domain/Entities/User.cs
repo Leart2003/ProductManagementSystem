@@ -11,7 +11,7 @@ namespace Domain.Entities
     public class User : IdentityUser
     {
 
-        public int Id { get; set; }
+        
 
         [Required]
         public string FirsName { get; set; }
@@ -21,15 +21,17 @@ namespace Domain.Entities
 
         [Phone]
 
-        public string phoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
-        public string email { get; set; }
+     
 
 
         public DateOnly  DateofBirth  { get; set; }
 
         public Gender Gender { get; set; }
 
-        public string Password { get; set; }
+        public List<Product> products = new List<Product>();
+
+    
     }
 }
