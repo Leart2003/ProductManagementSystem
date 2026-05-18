@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Dto
 {
-    public class RegisterDto
+    public class UpdateData
     {
         [Required]
         public string FirstName { get; set; }
@@ -14,23 +14,11 @@ namespace Application.Dto
         [Required]
         public string LastName { get; set; }
 
-        [Required]
+        [Phone]
         public string PhoneNumber { get; set; }
 
-
-        [Required]
-        [EmailAddress]
-        public string EmailAddress { get; set; }
-
-        [Required]
         public DateOnly DateOfBirth { get; set; }
 
-
-        [Required]
         public Gender Gender { get; set; }
-
-        [Required]
-        [MinLength(8)]
-        public string Password { get; set; }
     }
 }

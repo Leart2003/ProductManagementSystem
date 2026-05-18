@@ -18,13 +18,12 @@ namespace Domain.Entities
         public string? Category { get; set; }
 
         List<Product> products { get; set; } = new List<Product>();
+        public string UserId { get; set; }
+
+        public User User { get; set; }
 
 
-        //        •	- ID(GUID)
-        //•	- Name(string)
-        //•	- Description(string)
-        //•	- Price(decimal)
-        //•	- Category(string)
+  
 
     }
 }
