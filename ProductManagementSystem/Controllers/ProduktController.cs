@@ -33,5 +33,69 @@ namespace ProductManagementSystem.Controllers
 
             return Ok(userProducts);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateProduct(Product product)
+        {
+
+            var userId = _userManager.GetUserId(User);
+
+            product.Id = Guid.NewGuid();
+            product.UserId = userId;
+
+            await _productRepository.AddAsync(product);
+
+            return Ok("Product added succesfully");
+
+        }
+
+        [HttpPut("{id}")]
+
+
+        public async Task<IActionResult> UpdateProduct(Guid id, Product updatedProduct)
+        {
+            var product = await _productRepository.GetByIdAsync(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var userId = _userManager.GetUserId(User);
+
+            if (product.UserId != userId && !User.IsInRole("Admin"))
+            {
+                return Forbid();
+            }
+            product.Name = updatedProduct.Name;
+            product.Description = updatedProduct.Description;
+            product.Price = updatedProduct.Price;
+            product.Category = updatedProduct.Category;
+
+            await _productRepository.UpdateAsync(product);
+            return Ok("Product updated successfully.");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduct(Guid id)
+        {
+            var product = await _productRepository.GetByIdAsync(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+            var userId = _userManager.GetUserId(User);
+
+            if (product.UserId != userId && !User.IsInRole("Admin"))
+
+
+            {
+                return Forbid();
+            }
+
+            return Ok("Product was deleted succesfully");
+
+        }
     }
 }

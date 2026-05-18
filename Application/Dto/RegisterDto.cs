@@ -31,6 +31,8 @@ namespace Application.Dto
 
         [Required]
         [MinLength(8)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$",
+            ErrorMessage = "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.")]
         public string Password { get; set; }
     }
 }

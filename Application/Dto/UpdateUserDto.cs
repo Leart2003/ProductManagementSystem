@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Dto
 {
-    public class UpdateData
+    public class UpdateUserDto
     {
         [Required]
         public string FirstName { get; set; }
