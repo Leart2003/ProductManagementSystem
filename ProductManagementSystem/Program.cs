@@ -69,7 +69,7 @@ namespace ProductManagementSystem
                     }
                 }
                 string adminEmail = "malokuleart@gmail.com";
-                string adminPassword = "Leartbaba2003(";
+                string adminPassword = "";
 
                 var adminUser = await userManager.FindByEmailAsync(adminEmail);
                 if (adminUser == null)
