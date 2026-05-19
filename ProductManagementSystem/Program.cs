@@ -1,5 +1,6 @@
 
 using Domain.Entities;
+using Domain.Entities.Enums;
 using Domain.Interfaces;
 using Infrastructure.DB;
 using Infrastructure.DB;
@@ -18,7 +19,7 @@ namespace ProductManagementSystem
             // Add services to the container.
 
             builder.Services.AddControllers();
-          
+
             builder.Services.AddOpenApi();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -44,7 +45,7 @@ namespace ProductManagementSystem
 
             app.UseHttpsRedirection();
 
-        
+
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -54,7 +55,9 @@ namespace ProductManagementSystem
             //Admin, User permison
             using (var scope = app.Services.CreateScope())
             {
+
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
                 string[] roles = { "Admin", "User" };
 
@@ -65,9 +68,29 @@ namespace ProductManagementSystem
                         await roleManager.CreateAsync(new IdentityRole(role));
                     }
                 }
+                string adminEmail = "malokuleart@gmail.com";
+                string adminPassword = "Leartbaba2003(";
+
+                var adminUser = await userManager.FindByEmailAsync(adminEmail);
+                if (adminUser == null)
+                {
+                    adminUser = new User
+                    {
+                        UserName = adminEmail,
+                        Email = adminEmail,
+                        FirstName = "Leart",
+                        LastName = "Maloku",
+                        PhoneNumber ="+38345567710",
+                        Gender = Gender.Male,
+                        DateofBirth = new DateOnly(2003, 8, 5)
+                    };
+
+                    await userManager.CreateAsync(adminUser, adminPassword);
+                    await userManager.AddToRoleAsync(adminUser, "Admin");
+                }
+
+                app.Run();
             }
-            
-            app.Run();
         }
     }
 }

@@ -15,7 +15,8 @@ namespace Application.Dto
         public string LastName { get; set; }
 
         [Required]
-        public string PhoneNumber { get; set; }
+        [RegularExpression(@"^\+?[0-9]{7,15}$", ErrorMessage = "The PhoneNumber field is not a valid phone number.")]
+        public string PhoneNumber { get; set; } = string.Empty;
 
 
         [Required]

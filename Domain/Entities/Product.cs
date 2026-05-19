@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Domain.Entities
 {
@@ -17,9 +18,11 @@ namespace Domain.Entities
 
         public string? Category { get; set; }
 
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
-        public User User { get; set; }
+
+        [JsonIgnore]
+        public User? User { get; set; }
 
 
   
