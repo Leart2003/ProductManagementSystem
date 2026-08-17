@@ -20,6 +20,10 @@ namespace ProductManagementSystem.Controllers
             _productRepository = productRepository;
             _userManager = userManager;
         }
+        /// <summary>
+        /// Get all products 
+        /// </summary>
+        /// <returns>If user is admin returns all products</returns>
         [HttpGet]
         public async Task<IActionResult> GetAllProduct()
         {
@@ -33,6 +37,12 @@ namespace ProductManagementSystem.Controllers
 
             return Ok(userProducts);
         }
+        /// <summary>
+        /// Creates a product
+        /// </summary>
+        /// <param name="product">Create a product for the given fields</param>
+        /// <returns>Returns a positive message if product is created</returns>
+        /// <response code="200">Product added succesfully"</response>
 
         [HttpPost]
         public async Task<IActionResult> CreateProduct(Product product)
@@ -48,6 +58,14 @@ namespace ProductManagementSystem.Controllers
             return Ok("Product added succesfully");
 
         }
+        /// <summary>
+        /// Updates a product if user is Admin
+        /// </summary>
+        /// <param name="id">The id of the product to be updated</param>
+        /// <param name="updatedProduct">The product object containing the updated product information.</param>
+        /// <returns>Returns a message if product is updated</returns>
+        /// <response code="404">Product not found</response>
+        /// <response code="200">Product updated succesfully</response>
 
         [HttpPut("{id}")]
 
@@ -75,6 +93,15 @@ namespace ProductManagementSystem.Controllers
             await _productRepository.UpdateAsync(product);
             return Ok("Product updated successfully.");
         }
+        /// <summary>
+        /// Deleted a product if user is admin role
+        /// </summary>
+        /// <param name="id">The id of the product to be deleted</param>
+        /// <returns>
+        /// Returns a message if product is deleted
+        /// </returns>
+        /// <response code="404">Product not found</response>
+        /// <response code="201">Product is deleted succefully</response>
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(Guid id)

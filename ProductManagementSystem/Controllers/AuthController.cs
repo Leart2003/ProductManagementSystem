@@ -23,7 +23,12 @@ namespace ProductManagementSystem.Controllers
         }
 
 
-        //Create
+        /// <summary>
+        /// Registers a user into database
+        /// </summary>
+        /// <param name="registerDto"> The user object containing the updated product information.</param>
+        /// <returns>If user tried to register with the same emeail user will have a message Email already exist.If user doesnt exist then there will be a message user created succesfully</returns>
+        /// 
         [HttpPost("register")]
 
         public async Task<IActionResult>Register(RegisterDto registerDto)
@@ -58,6 +63,13 @@ namespace ProductManagementSystem.Controllers
 
 
         }
+        /// <summary>
+        /// Login method
+        /// </summary>
+        /// <param name="loginDto">User will login with the user information</param>
+        /// <returns>If email is invalid there will be a message("invalid email")</returns>
+        /// <response code="200">Login succesfully</response>
+        /// /// <response code="200">Login succesfully</response>
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
@@ -76,7 +88,12 @@ namespace ProductManagementSystem.Controllers
             }
             return Ok("Login succesfullyx");
         }
-        //update
+        /// <summary>
+        /// Updates information of a user
+        /// </summary>
+        /// <param name="dto">The updated userDto object information</param>
+        /// <returns></returns>
+        /// /// <response code="200">User updated succesfully</response>
 
         [HttpPut("update")]
         public async Task<IActionResult> UpdateProfile(UpdateUserDto dto)
